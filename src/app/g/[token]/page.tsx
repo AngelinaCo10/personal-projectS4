@@ -8,24 +8,33 @@ type Gift = {
   sent_at: string;
 };
 
-export default async function GiftPage({
-  params,
-}: {
-  params: { token: string };
-}) {
-  const supabase = supabaseServer();
+export default async function GiftPage(
+  props: { params: Promise<{ token: string }> }
+) {
+  const { token } = await props.params; // ✅ unwrap params promise
 
+  const supabase = supabaseServer();
   const { data: gift, error } = await supabase
     .from("gift_cards")
     .select("sender_name,message,amount_cents,currency,sent_at")
-    .eq("claim_token", params.token)
+    .eq("claim_token", token)
     .maybeSingle<Gift>();
 
-  if (error || !gift) {
+  if (error) {
+    return (
+      <main style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
+        <h1>Database error</h1>
+        <p>{error.message}</p>
+        <p>Token: {token}</p>
+      </main>
+    );
+  }
+
+  if (!gift) {
     return (
       <main style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
         <h1>Niet gevonden</h1>
-        <p>Deze link is ongeldig of het cadeau bestaat niet.</p>
+        <p>Token: {token}</p>
       </main>
     );
   }
@@ -33,18 +42,9 @@ export default async function GiftPage({
   return (
     <main style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
       <h1>Je hebt een cadeau gekregen 🎁</h1>
-
-      <p>
-        <strong>Van:</strong> {gift.sender_name}
-      </p>
-
-      <p>
-        <strong>Bedrag:</strong> € {(gift.amount_cents / 100).toFixed(2)}
-      </p>
-
-      <p>
-        <strong>Bericht:</strong>
-      </p>
+      <p><strong>Van:</strong> {gift.sender_name}</p>
+      <p><strong>Bedrag:</strong> € {(gift.amount_cents / 100).toFixed(2)}</p>
+      <p><strong>Bericht:</strong></p>
       <p>{gift.message}</p>
     </main>
   );
