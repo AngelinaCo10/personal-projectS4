@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -17,6 +19,16 @@ export default function SentPage() {
 
   const path = `/g/${token}`;
 
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(path);
+      // eventueel: toast/alert
+    } catch {
+      // fallback
+      window.prompt("Kopieer de link:", path);
+    }
+  };
+
   return (
     <main style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
       <h1>🎉 Je cadeau is verstuurd!</h1>
@@ -24,7 +36,7 @@ export default function SentPage() {
       <p>
         <Link href={path}>{path}</Link>
       </p>
-      <button onClick={() => navigator.clipboard.writeText(path)}>Kopieer link</button>
+      <button onClick={copy}>Kopieer link</button>
     </main>
   );
 }
