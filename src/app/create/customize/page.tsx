@@ -1,0 +1,254 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
+function ConfirmModal({
+  open,
+  message,
+  onConfirm,
+  onClose,
+}: {
+  open: boolean;
+  message: string;
+  onConfirm: () => void;
+  onClose: () => void;
+}) {
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
+      <div className="w-full max-w-[390px] rounded-2xl bg-white p-5 shadow-xl">
+        <h3 className="text-lg font-semibold mb-2">Weet je het zeker?</h3>
+        <p className="text-gray-600 mb-5">{message}</p>
+
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-1/2 rounded-2xl py-3 font-medium border border-gray-200"
+          >
+            Nee, doorgaan
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="w-1/2 rounded-2xl py-3 font-medium bg-black text-white"
+          >
+            Ja, stoppen
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const MUSIC_OPTIONS = [
+  { id: "none", label: "No music" },
+  { id: "lofi", label: "Lo-fi" },
+  { id: "happy", label: "Happy" },
+  { id: "piano", label: "Piano" },
+];
+
+const GIFT_COLORS = [
+  { name: "Pink", value: "#ff4fa3" },
+  { name: "Purple", value: "#7c3aed" },
+  { name: "Blue", value: "#2563eb" },
+  { name: "Green", value: "#16a34a" },
+];
+
+const CARD_COLORS = [
+  { name: "White", value: "#ffffff" },
+  { name: "Cream", value: "#fff7ed" },
+  { name: "Light Gray", value: "#f3f4f6" },
+  { name: "Light Pink", value: "#ffe4e6" },
+];
+
+export default function CustomizePage() {
+  const router = useRouter();
+  const sp = useSearchParams();
+
+  const base = useMemo(() => {
+    return {
+      senderName: sp.get("senderName") ?? "",
+      message: sp.get("message") ?? "",
+      amount: sp.get("amount") ?? "10",
+    };
+  }, [sp]);
+
+  const [music, setMusic] = useState("lofi");
+  const [giftColor, setGiftColor] = useState(GIFT_COLORS[0].value);
+  const [cardColor, setCardColor] = useState(CARD_COLORS[0].value);
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
+  function goPreview() {
+    const params = new URLSearchParams({
+      senderName: base.senderName,
+      message: base.message,
+      amount: base.amount,
+      music,
+      giftColor,
+      cardColor,
+    });
+
+    router.push(`/preview?${params.toString()}`);
+  }
+
+  function goBack() {
+    const params = new URLSearchParams({
+      senderName: base.senderName,
+      message: base.message,
+      amount: base.amount,
+    });
+    router.push(`/create?${params.toString()}`);
+  }
+
+  return (
+    <>
+      <div className="min-h-screen bg-blue-400 md:bg-gray-200 md:flex md:justify-center md:py-10">
+        <main className="min-h-screen w-screen bg-blue-400 p-6 md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
+          {/* Header IN de telefoon */}
+          <div className="mt-[60px] flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setConfirmOpen(true)}
+              className="rounded-xl px-3 py-2 text-sm font-medium bg-white/10 text-white border border-white/30"
+            >
+              Cancel
+            </button>
+
+            <h1 className="text-3xl text-white font-rowdies text-center flex-1">
+              GIFTY
+            </h1>
+
+            <div className="w-[72px]" />
+          </div>
+
+          {/* Center card */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="w-full bg-white rounded-2xl p-6">
+              <h2 className="text-xl font-semibold text-center mb-1">
+                Customize
+              </h2>
+              <p className="text-center text-gray-600 mb-6">
+                Choose music and colors.
+              </p>
+
+              {/* Music */}
+              <p className="text-sm font-medium text-gray-700 mb-2">Music</p>
+              <div className="grid grid-cols-2 gap-3">
+                {MUSIC_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setMusic(opt.id)}
+                    className={`rounded-xl py-3 font-medium border transition ${
+                      music === opt.id
+                        ? "bg-black text-white border-black"
+                        : "bg-white text-black border-gray-200"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Gift color */}
+              <p className="text-sm font-medium text-gray-700 mt-6 mb-2">
+                Gift color
+              </p>
+              <div className="flex gap-3">
+                {GIFT_COLORS.map((c) => (
+                  <button
+                    key={c.value}
+                    type="button"
+                    onClick={() => setGiftColor(c.value)}
+                    className={`h-10 w-10 rounded-full border ${
+                      giftColor === c.value ? "border-black" : "border-gray-200"
+                    }`}
+                    style={{ backgroundColor: c.value }}
+                    aria-label={c.name}
+                    title={c.name}
+                  />
+                ))}
+              </div>
+
+              {/* Card color */}
+              <p className="text-sm font-medium text-gray-700 mt-6 mb-2">
+                Card color
+              </p>
+              <div className="flex gap-3">
+                {CARD_COLORS.map((c) => (
+                  <button
+                    key={c.value}
+                    type="button"
+                    onClick={() => setCardColor(c.value)}
+                    className={`h-10 w-10 rounded-full border ${
+                      cardColor === c.value ? "border-black" : "border-gray-200"
+                    }`}
+                    style={{ backgroundColor: c.value }}
+                    aria-label={c.name}
+                    title={c.name}
+                  />
+                ))}
+              </div>
+
+              {/* Preview */}
+              <div className="mt-6 rounded-2xl p-4 border border-gray-200">
+                <p className="text-sm font-medium text-gray-700 mb-3">Preview</p>
+
+                <div className="flex items-center gap-4">
+                  <div
+                    className="h-14 w-14 rounded-2xl shadow-sm"
+                    style={{ backgroundColor: giftColor }}
+                  />
+
+                  <div
+                    className="flex-1 rounded-2xl p-3"
+                    style={{ backgroundColor: cardColor }}
+                  >
+                    <p className="text-sm font-semibold">€{base.amount}</p>
+                    <p className="text-xs text-gray-600 line-clamp-2">
+                      {base.message || "Your message..."}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-xs text-gray-500 mt-3">
+                  Music: {music}
+                </p>
+              </div>
+
+              {/* Buttons */}
+              <div className="mt-6 flex gap-3">
+                <button
+                  type="button"
+                  onClick={goBack}
+                  className="w-1/2 rounded-2xl py-4 font-medium border border-gray-200"
+                >
+                  Back
+                </button>
+
+                <button
+                  type="button"
+                  onClick={goPreview}
+                  className="w-1/2 rounded-2xl py-4 font-medium bg-black text-white"
+                >
+                  Preview
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <ConfirmModal
+        open={confirmOpen}
+        message="Weet je zeker dat je wilt stoppen? Je wijzigingen gaan verloren."
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={() => router.push("/")}
+      />
+    </>
+  );
+}
