@@ -66,94 +66,95 @@ export default function CreatePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-blue-400 md:bg-gray-200 md:flex md:justify-center md:py-10">
-        <main className="min-h-screen w-screen bg-blue-400 p-6 md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
+      <div className="min-h-screen bg-[#5ECCFF] md:bg-gray-200 md:flex md:justify-center md:py-10">
+        <main className="min-h-screen w-screen bg-[#5ECCFF] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col ">
           {/* Header IN de telefoon */}
-          <div className="mt-[60px] flex items-center justify-between">
-            <button
-              type="button"
-              onClick={() => setConfirmOpen(true)}
-              className="rounded-xl px-3 py-2 text-sm font-medium bg-white/10 text-white border border-white/30"
-            >
-              Cancel
-            </button>
+          <div className="mt-[60px] flex items-center justify-center">
 
-            <h1 className="text-3xl text-white font-rowdies text-center flex-1">
+
+            <h1 className="text-3xl text-white font-rowdies text-center ">
               GIFTY
             </h1>
 
-            {/* Spacer zodat titel gecentreerd blijft */}
-            <div className="w-[72px]" />
           </div>
 
           {/* Center card */}
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex">
             <form
               onSubmit={onSubmit}
-              className="w-full bg-white rounded-2xl p-6 shadow-sm"
+              className="w-full flex-1 bg-white rounded-t-4xl p-6 shadow-sm flex flex-col"
             >
-              <h2 className="text-xl font-semibold text-center mb-1">
-                Create your gift
+              <button
+                type="button"
+                onClick={() => setConfirmOpen(true)}
+                className="self-start rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
+              >
+                X
+              </button>
+
+              <h2 className="text-3xl font-semibold text-start ml-3 mb-1 text-[#5ECCFF] ">
+                Make your Gifty
               </h2>
-              <p className="text-center text-gray-600 mb-6">
+              <p className="text-start text-gray-600 ml-3 mb-6 font-['Anonymous_Pro']">
                 Write your message and choose an amount.
               </p>
-
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your name
-              </label>
-              <input
-                value={senderName}
-                onChange={(e) => setSenderName(e.target.value)}
-                placeholder="e.g. Eliza"
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
-              />
-
-              <label className="block text-sm font-medium text-gray-700 mt-5 mb-2">
-                Message
-              </label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write something sweet..."
-                rows={4}
-                className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
-              />
-
-              <label className="block text-sm font-medium text-gray-700 mt-5 mb-2">
-                Amount (€)
-              </label>
-
-              <div className="grid grid-cols-3 gap-3">
-                {[5, 10, 25].map((v) => (
-                  <button
-                    key={v}
-                    type="button"
-                    onClick={() => setAmount(v)}
-                    className={`rounded-xl py-3 font-medium border transition ${
-                      amount === v
-                        ? "bg-black text-white border-black"
-                        : "bg-white text-black border-gray-200"
-                    }`}
-                  >
-                    €{v}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-3">
+              <div className=" p-4 flex flex-col bg-white rounded-3xl relative shadow-[0px_4px_13px_0px_rgba(94,204,255,1.00)] border border-neutral-400 mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Your name
+                </label>
                 <input
-                  type="number"
-                  min={1}
-                  value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
+                  value={senderName}
+                  onChange={(e) => setSenderName(e.target.value)}
+                  placeholder="e.g. Eliza"
                   className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
                 />
+
+                <label className="block text-sm font-medium text-gray-700 mt-5 mb-2">
+                  Message
+                </label>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Write something sweet..."
+                  rows={4}
+                  className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
+                />
+
+                <label className="block text-sm font-medium text-gray-700 mt-5 mb-2">
+                  Amount (€)
+                </label>
+
+                <div className="grid grid-cols-3 gap-3">
+                  {[5, 10, 25].map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setAmount(v)}
+                      className={`rounded-xl py-3 font-medium border transition ${amount === v
+                        ? "bg-black text-white border-black"
+                        : "bg-white text-black border-gray-200"
+                        }`}
+                    >
+                      €{v}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-3">
+                  <input
+                    type="number"
+                    min={1}
+                    value={amount}
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
+                  />
+                </div>
               </div>
+
 
               <button
                 type="submit"
-                className="mt-6 w-full rounded-2xl py-4 font-medium bg-black text-white disabled:opacity-50"
+                className="mt-auto w-full rounded-4xl py-4 font-medium bg-[#53ccff] text-white hover:disabled:opacity-50"
                 disabled={!senderName || !message || amount < 1}
               >
                 Next

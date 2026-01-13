@@ -79,7 +79,6 @@ export default function CustomizePage() {
   const [music, setMusic] = useState("lofi");
   const [giftColor, setGiftColor] = useState(GIFT_COLORS[0].value);
   const [cardColor, setCardColor] = useState(CARD_COLORS[0].value);
-
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   function goPreview() {
@@ -106,32 +105,31 @@ export default function CustomizePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-blue-400 md:bg-gray-200 md:flex md:justify-center md:py-10">
-        <main className="min-h-screen w-screen bg-blue-400 p-6 md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
-          {/* Header IN de telefoon */}
-          <div className="mt-[60px] flex items-center justify-between">
-            <button
-              type="button"
-              onClick={() => setConfirmOpen(true)}
-              className="rounded-xl px-3 py-2 text-sm font-medium bg-white/10 text-white border border-white/30"
-            >
-              Cancel
-            </button>
-
-            <h1 className="text-3xl text-white font-rowdies text-center flex-1">
+      <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
+        <main className="min-h-screen w-screen bg-[#53ccff] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
+          {/* Header */}
+          <div className="mt-[60px] flex items-center justify-center">
+            <h1 className="text-3xl text-white font-rowdies text-center">
               GIFTY
             </h1>
-
-            <div className="w-[72px]" />
           </div>
 
-          {/* Center card */}
-          <div className="flex-1 flex items-center justify-center">
-            <div className="w-full bg-white rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-center mb-1">
+          {/* Card / sheet */}
+          <div className="flex-1 flex">
+            <div className="w-full flex-1 bg-white rounded-t-4xl p-6 shadow-sm flex flex-col">
+              {/* Cancel (zelfde plek als Create) */}
+              <button
+                type="button"
+                onClick={() => setConfirmOpen(true)}
+                className="self-start rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
+              >
+                X
+              </button>
+
+              <h2 className="text-3xl font-semibold text-center mb-1 text-[#53ccff]">
                 Customize
               </h2>
-              <p className="text-center text-gray-600 mb-6">
+              <p className="text-center text-gray-600 mb-6 font-anonymous">
                 Choose music and colors.
               </p>
 
@@ -215,13 +213,11 @@ export default function CustomizePage() {
                   </div>
                 </div>
 
-                <p className="text-xs text-gray-500 mt-3">
-                  Music: {music}
-                </p>
+                <p className="text-xs text-gray-500 mt-3">Music: {music}</p>
               </div>
 
-              {/* Buttons */}
-              <div className="mt-6 flex gap-3">
+              {/* Buttons bottom (zelfde vibe als Create) */}
+              <div className="mt-auto pt-6 flex gap-3">
                 <button
                   type="button"
                   onClick={goBack}

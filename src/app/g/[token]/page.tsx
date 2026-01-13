@@ -43,7 +43,7 @@ export default async function GiftPage(
     <main style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
       <h1>Je hebt een cadeau gekregen 🎁</h1>
       <p><strong>Van:</strong> {gift.sender_name}</p>
-      <p><strong>Bedrag:</strong> € {(gift.amount_cents / 100).toFixed(2)}</p>
+      <p><strong>Bedrag:</strong> € {(gift.amount_cents)}</p>
       <p><strong>Bericht:</strong></p>
       <p>{gift.message}</p>
     </main>

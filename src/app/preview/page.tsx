@@ -70,7 +70,7 @@ export default function PreviewPage() {
       body: JSON.stringify({
         sender_name: data.senderName,
         message: data.message,
-        amount_cents: data.amount * 100,
+        amount_cents: data.amount,
         currency: "EUR",
         claim_token: token,
       }),
@@ -189,7 +189,7 @@ export default function PreviewPage() {
             >
               Edit
             </Link> */}
-            
+
 
           </div>
         </div>
