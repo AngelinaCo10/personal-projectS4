@@ -72,7 +72,7 @@ export default function CreatePage() {
           <div className="mt-[60px] flex items-center justify-center">
 
 
-            <h1 className="text-3xl text-white font-rowdies text-center ">
+            <h1 className="text-[48px] text-white font-rowdies text-center font-['Rowdies']">
               GIFTY
             </h1>
 
@@ -92,14 +92,14 @@ export default function CreatePage() {
                 X
               </button>
 
-              <h2 className="text-3xl font-semibold text-start ml-3 mb-1 text-[#5ECCFF] ">
+              <h2 className="text-3xl font-semibold text-start ml-3 mb-1 mt-3 text-[#5ECCFF] font-['Rowdies']">
                 Make your Gifty
               </h2>
               <p className="text-start text-gray-600 ml-3 mb-6 font-['Anonymous_Pro']">
                 Write your message and choose an amount.
               </p>
               <div className=" p-4 flex flex-col bg-white rounded-3xl relative shadow-[0px_4px_13px_0px_rgba(94,204,255,1.00)] border border-neutral-400 mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2 font-['Anonymous_Pro']">
                   Your name
                 </label>
                 <input
@@ -109,7 +109,7 @@ export default function CreatePage() {
                   className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
                 />
 
-                <label className="block text-sm font-medium text-gray-700 mt-5 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mt-5 mb-2 font-['Anonymous_Pro']">
                   Message
                 </label>
                 <textarea
@@ -120,7 +120,7 @@ export default function CreatePage() {
                   className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-black"
                 />
 
-                <label className="block text-sm font-medium text-gray-700 mt-5 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mt-5 mb-2 font-['Anonymous_Pro']">
                   Amount (€)
                 </label>
 
@@ -154,7 +154,7 @@ export default function CreatePage() {
 
               <button
                 type="submit"
-                className="mt-auto w-full rounded-4xl py-4 font-medium bg-[#53ccff] text-white hover:disabled:opacity-50"
+                className="mt-auto w-full rounded-4xl py-4 font-medium bg-[#53ccff] text-white hover:disabled:opacity-50 font-['Rowdies']"
                 disabled={!senderName || !message || amount < 1}
               >
                 Next

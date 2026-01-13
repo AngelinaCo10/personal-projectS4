@@ -6,7 +6,7 @@ export default function Home() {
       <main className="relative min-h-screen w-screen  bg-[#5ECCFF] p-6 md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
         
         {/* GIFTY gecentreerd */}
-        <h1 className="text-5xl text-white font-rowdies text-center mb-6 mt-16">
+        <h1 className="text-[48px] text-white font-[Rowdies] text-center mb-6 mt-16">
           GIFTY
         </h1>
 

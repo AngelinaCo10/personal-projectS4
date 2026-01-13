@@ -109,7 +109,7 @@ export default function CustomizePage() {
         <main className="min-h-screen w-screen bg-[#53ccff] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
           {/* Header */}
           <div className="mt-[60px] flex items-center justify-center">
-            <h1 className="text-3xl text-white font-rowdies text-center">
+            <h1 className="text-[48px] text-white font-rowdies text-center font-['Rowdies']">
               GIFTY
             </h1>
           </div>
@@ -126,15 +126,16 @@ export default function CustomizePage() {
                 X
               </button>
 
-              <h2 className="text-3xl font-semibold text-center mb-1 text-[#53ccff]">
+              <h2 className="text-3xl font-semibold text-start ml-3 mt-3 mb-1 text-[#53ccff] font-['Rowdies']">
                 Customize
               </h2>
-              <p className="text-center text-gray-600 mb-6 font-anonymous">
+              <p className="text-start ml-3  text-gray-600 mb-6 font-['Anonymous_Pro']">
                 Choose music and colors.
               </p>
+              <div className=" p-4 flex flex-col bg-white rounded-3xl relative shadow-[0px_4px_13px_0px_rgba(94,204,255,1.00)] border border-neutral-400 mb-6">
 
               {/* Music */}
-              <p className="text-sm font-medium text-gray-700 mb-2">Music</p>
+              <p className="text-sm font-medium text-gray-700 mb-2 font-['Anonymous_Pro']">Music</p>
               <div className="grid grid-cols-2 gap-3">
                 {MUSIC_OPTIONS.map((opt) => (
                   <button
@@ -153,7 +154,7 @@ export default function CustomizePage() {
               </div>
 
               {/* Gift color */}
-              <p className="text-sm font-medium text-gray-700 mt-6 mb-2">
+              <p className="text-sm font-medium text-gray-700 mt-6 mb-2 font-['Anonymous_Pro']">
                 Gift color
               </p>
               <div className="flex gap-3">
@@ -173,7 +174,7 @@ export default function CustomizePage() {
               </div>
 
               {/* Card color */}
-              <p className="text-sm font-medium text-gray-700 mt-6 mb-2">
+              <p className="text-sm font-medium text-gray-700 mt-6 mb-2 font-['Anonymous_Pro']">
                 Card color
               </p>
               <div className="flex gap-3">
@@ -194,7 +195,7 @@ export default function CustomizePage() {
 
               {/* Preview */}
               <div className="mt-6 rounded-2xl p-4 border border-gray-200">
-                <p className="text-sm font-medium text-gray-700 mb-3">Preview</p>
+                <p className="text-sm font-medium text-gray-700 mb-3 font-['Anonymous_Pro']">Preview</p>
 
                 <div className="flex items-center gap-4">
                   <div
@@ -213,7 +214,8 @@ export default function CustomizePage() {
                   </div>
                 </div>
 
-                <p className="text-xs text-gray-500 mt-3">Music: {music}</p>
+                <p className="text-xs text-gray-500 mt-3 font-['Anonymous_Pro']">Music: {music}</p>
+              </div>
               </div>
 
               {/* Buttons bottom (zelfde vibe als Create) */}
@@ -221,7 +223,7 @@ export default function CustomizePage() {
                 <button
                   type="button"
                   onClick={goBack}
-                  className="w-1/2 rounded-2xl py-4 font-medium border border-gray-200"
+                  className="w-1/2 rounded-4xl py-4 font-medium border border-gray-200 font-['Rowdies']"
                 >
                   Back
                 </button>
@@ -229,7 +231,7 @@ export default function CustomizePage() {
                 <button
                   type="button"
                   onClick={goPreview}
-                  className="w-1/2 rounded-2xl py-4 font-medium bg-black text-white"
+                  className="w-1/2 rounded-4xl py-4 font-medium bg-[#53ccff]  text-white hover:disabled:opacity-50 font-['Rowdies'] "
                 >
                   Preview
                 </button>
