@@ -1,13 +1,53 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
+import GiftCardAndGift from "@/components/GiftCardAndGift";
+
+function ConfirmModal({
+    open,
+    message,
+    onConfirm,
+    onClose,
+}: {
+    open: boolean;
+    message: string;
+    onConfirm: () => void;
+    onClose: () => void;
+}) {
+    if (!open) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
+            <div className="w-full max-w-[390px] rounded-2xl bg-white p-5 shadow-xl">
+                <h3 className="text-lg font-semibold mb-2">Weet je het zeker?</h3>
+                <p className="text-gray-600 mb-5">{message}</p>
+
+                <div className="flex gap-3">
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="w-1/2 rounded-2xl py-3 font-medium border border-gray-200"
+                    >
+                        Nee, doorgaan
+                    </button>
+                    <button
+                        type="button"
+                        onClick={onConfirm}
+                        className="w-1/2 rounded-2xl py-3 font-medium bg-black text-white"
+                    >
+                        Ja, stoppen
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default function PreviewPage() {
     const sp = useSearchParams();
+    const router = useRouter();
 
-    /* ---------------- data from previous steps ---------------- */
     const data = useMemo(() => {
         return {
             senderName: sp.get("senderName") ?? "",
@@ -18,46 +58,12 @@ export default function PreviewPage() {
         };
     }, [sp]);
 
-    /* ---------------- send / share state ---------------- */
-    const [sent, setSent] = useState(false);
     const [sending, setSending] = useState(false);
-    const [shareUrl, setShareUrl] = useState("");
-    const [copied, setCopied] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    /* ---------------- helpers ---------------- */
-    async function copyLink() {
-        if (!shareUrl) return;
-        await navigator.clipboard.writeText(shareUrl);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-    }
+    // ✅ modal state
+    const [confirmOpen, setConfirmOpen] = useState(false);
 
-    function openWhatsApp() {
-        if (!shareUrl) return;
-        const text = `You got a GIFTY! 🎁 Open it here: ${shareUrl}`;
-        window.open(
-            `https://wa.me/?text=${encodeURIComponent(text)}`,
-            "_blank"
-        );
-    }
-
-    async function nativeShare() {
-        if (!shareUrl) return;
-
-        if (navigator.share) {
-            await navigator.share({
-                title: "GIFTY",
-                text: "You got a GIFTY! 🎁",
-                url: shareUrl,
-            });
-        } else {
-            await copyLink();
-            alert("Share not supported — link copied");
-        }
-    }
-
-    /* ---------------- SEND: create token + insert ---------------- */
     async function onSend() {
         setSending(true);
         setError(null);
@@ -73,8 +79,8 @@ export default function PreviewPage() {
                 amount_cents: data.amount,
                 currency: "EUR",
                 claim_token: token,
-
-                
+                gift_color: data.giftColor,
+                card_color: data.cardColor,
             }),
         });
 
@@ -86,119 +92,80 @@ export default function PreviewPage() {
             return;
         }
 
-        const url = `${window.location.origin}/g/${json.token}`;
-        setShareUrl(url);
-        setSent(true);
-        setSending(false);
+        router.push(`/sent?token=${encodeURIComponent(json.token)}`);
     }
 
-    /* ---------------- UI ---------------- */
     return (
-        <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
-            <main className="min-h-screen w-screen bg-[#53ccff] p-6 md:max-w-[390px] md:rounded-2xl md:shadow-xl flex flex-col">
-
-                {/* Header */}
-                <h1 className="mt-[60px] text-[48px] text-white font-rowdies text-center font-['Rowdies']">
-                    GIFTY
-                </h1>
-
-                {/* Preview */}
-                <div className="flex-1 flex items-center justify-center">
-                    <div className="w-full space-y-6">
-
-
-                        {/* Card preview */}
-                        <div
-                            className="mb-auto h-80 p-6   border-neutral-400"
-                            style={{ backgroundColor: data.cardColor }}
-                        >
-                            <p className="text-3xl font-semibold mb-2 font-['anonymous_pro']">
-                                From: {data.senderName}
-                            </p>
-                            <p className="text-gray-800">
-                                {data.message}
-                            </p>
-                        </div>
-                        <div className="w-full bg-white p-6 shadow-sm ">
-
-                            {/* Gift preview */}
-                            <div className="flex justify-center">
-                                <div
-                                    className="w-44 h-32 rounded-2xl shadow-xl flex items-end justify-center"
-                                    style={{ backgroundColor: data.giftColor }}
-                                >
-                                    <span className="mb-3 bg-black text-white px-4 py-2 rounded-4xl text-sm font-semibold">
-                                        €{data.amount}
-                                    </span>
-                                </div>
-                            </div>
-
-
-                            {/* Error */}
-                            {error && (
-                                <p className="text-sm text-red-600 text-center">
-                                    {error}
-                                </p>
-                            )}
-                        </div>
-                        {/* Actions */}
-                        {!sent ? (
-                            <button
-                                onClick={onSend}
-                                disabled={sending}
-                                className="w-full bg-black text-white py-4 rounded-4xl font-medium disabled:opacity-50 font-['Rowdies']"
-                            >
-                                {sending ? "Sending…" : "Send gift 🎁"}
-                            </button>
-                        ) : (
-                            <div className="bg-white rounded-2xl p-5">
-                                <h3 className="text-lg font-semibold text-center mb-1">
-                                    Sent! 🎉
-                                </h3>
-                                <p className="text-center text-gray-600 mb-4">
-                                    Share the link with your friend
-                                </p>
-
-                                <div className="rounded-xl border px-4 py-3 text-sm break-all">
-                                    {shareUrl}
-                                </div>
-
-                                <div className="mt-4 grid grid-cols-3 gap-3">
-                                    <button
-                                        onClick={openWhatsApp}
-                                        className="rounded-2xl py-3 bg-green-600 text-white"
-                                    >
-                                        💬
-                                    </button>
-
-                                    <button
-                                        onClick={copyLink}
-                                        className="rounded-2xl py-3 border"
-                                    >
-                                        {copied ? "Copied!" : "📋"}
-                                    </button>
-
-                                    <button
-                                        onClick={nativeShare}
-                                        className="mt-auto rounded-2xl py-3 bg-black text-white"
-                                    >
-                                        📤
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* <Link
-              href={`/create/customize?${sp.toString()}`}
-              className="block text-center text-white/80 text-sm"
-            >
-              Edit
-            </Link> */}
-
-
+        <>
+            <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
+                <main className="min-h-screen w-screen bg-[#53ccff] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
+                    {/* Header */}
+                    <div className="mt-[60px] flex items-center justify-center">
+                        <h1 className="text-[48px] text-white font-rowdies text-center font-['Rowdies']">
+                            GIFTY
+                        </h1>
                     </div>
-                </div>
-            </main>
-        </div>
+
+                    {/* Sheet */}
+                    <div className="flex-1 flex">
+                        <div className="w-full flex-1 bg-white rounded-t-4xl p-6 shadow-sm flex flex-col">
+                            <button
+                                type="button"
+                                onClick={() => setConfirmOpen(true)}
+                                className="self-end rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
+                            >
+                                X
+                            </button>
+
+                            {/* Preview kleiner */}
+                            <div className="flex justify-center">
+                                <div className="origin-top w-full">
+                                    <GiftCardAndGift
+                                        senderName={data.senderName}
+                                        message={data.message}
+                                        amountLabel={`€ ${data.amount}`}
+                                        giftColor={data.giftColor}
+                                        cardColor={data.cardColor}
+                                        variant="preview"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="mt-auto" />
+
+                            {error && (
+                                <p className="text-sm text-red-600 text-center mb-3">{error}</p>
+                            )}
+
+                            <div className="grid grid-cols-2 gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => router.back()}
+                                    className="rounded-4xl py-4 font-medium border border-gray-300 text-gray-700 font-['Rowdies']"
+                                >
+                                    Back
+                                </button>
+
+                                <button
+                                    onClick={onSend}
+                                    disabled={sending}
+                                    className="rounded-4xl py-4 font-medium bg-[#53CCFF] text-white disabled:opacity-50 font-['Rowdies']"
+                                >
+                                    {sending ? "Sending…" : "Send gift"}
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <ConfirmModal
+                open={confirmOpen}
+                message="Weet je zeker dat je wilt stoppen? Je wijzigingen gaan verloren."
+                onClose={() => setConfirmOpen(false)}
+                onConfirm={() => router.push("/")}
+            />
+        </>
     );
 }

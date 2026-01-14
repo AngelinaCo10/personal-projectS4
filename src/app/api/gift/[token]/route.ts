@@ -11,7 +11,7 @@ export async function GET(
 
   const { data, error } = await supabase
     .from("gift_cards")
-    .select("sender_name,message,amount_cents,currency,sent_at")
+    .select("sender_name,message,amount_cents,currency,sent_at,card_color,gift_color")
     .eq("claim_token", token)
     .maybeSingle();
 

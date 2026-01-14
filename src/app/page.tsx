@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#5ECCFF] md:bg-gray-200 md:flex md:justify-center md:py-10 ">
       <main className="relative min-h-screen w-screen  bg-[#5ECCFF] p-6 md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
-        
+
         {/* GIFTY gecentreerd */}
         <h1 className="text-[48px] text-white font-[Rowdies] text-center mb-6 mt-16">
           GIFTY
@@ -19,6 +20,17 @@ export default function Home() {
             <p className="text-gray-600">
               Write a card message, choose an amount and send it to your friends and family digitally!
             </p>
+            <div className="flex justify-end items-center">
+              <div className="relative w-50 h-50">
+                <Image
+                  src="/Gifts.svg"
+                  alt="Gift"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -27,7 +39,7 @@ export default function Home() {
           href="/create"
           className="hover:bg-[#303030] hover:text-white mt-6 block w-full text-center bg-white text-[#5ECCFF] py-4 rounded-4xl font-medium"
         >
-          Make your gift
+          Make your gifty
         </Link>
 
       </main>

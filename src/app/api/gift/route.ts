@@ -23,6 +23,9 @@ export async function POST(req: Request) {
     currency,
     claim_token,
     sent_at: new Date().toISOString(),
+    gift_color: body.gift_color || null,
+    card_color: body.card_color || null,
+    
   });
 
   if (error) {

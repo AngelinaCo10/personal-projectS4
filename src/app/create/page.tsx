@@ -51,18 +51,30 @@ export default function CreatePage() {
   const [amount, setAmount] = useState<number>(10);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
+function onSubmit(e: React.FormEvent) {
+  e.preventDefault();
+  setFormError(null);
 
-    const params = new URLSearchParams({
-      senderName,
-      message,
-      amount: String(amount),
-    });
+  const nameOk = senderName.trim().length > 0;
+  const msgOk = message.trim().length > 0;
+  const amountOk = Number.isFinite(amount) && amount >= 1;
 
-    router.push(`/create/customize?${params.toString()}`);
+  if (!nameOk || !msgOk || !amountOk) {
+    if (!nameOk) return setFormError("Fill in your name");
+    if (!msgOk) return setFormError("Write a message");
+    return setFormError("Kies een bedrag van minimaal €1.");
   }
+
+  const params = new URLSearchParams({
+    senderName: senderName.trim(),
+    message: message.trim(),
+    amount: String(amount),
+  });
+
+  router.push(`/create/customize?${params.toString()}`);
+}
 
   return (
     <>
@@ -87,9 +99,9 @@ export default function CreatePage() {
               <button
                 type="button"
                 onClick={() => setConfirmOpen(true)}
-                className="self-start rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
+                className="self-end rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
               >
-                X
+                X 
               </button>
 
               <h2 className="text-3xl font-semibold text-start ml-3 mb-1 mt-3 text-[#5ECCFF] font-['Rowdies']">
@@ -131,7 +143,7 @@ export default function CreatePage() {
                       type="button"
                       onClick={() => setAmount(v)}
                       className={`rounded-xl py-3 font-medium border transition ${amount === v
-                        ? "bg-black text-white border-black"
+                        ? "bg-[#303030] text-white border-bg-[#303030]"
                         : "bg-white text-black border-gray-200"
                         }`}
                     >
@@ -151,11 +163,15 @@ export default function CreatePage() {
                 </div>
               </div>
 
+{formError && (
+  <p className="mb-3 text-sm text-red-600 text-center font-['Anonymous_Pro']">
+    {formError}
+  </p>
+)}
 
               <button
                 type="submit"
                 className="mt-auto w-full rounded-4xl py-4 font-medium bg-[#53ccff] text-white hover:disabled:opacity-50 font-['Rowdies']"
-                disabled={!senderName || !message || amount < 1}
               >
                 Next
               </button>

@@ -121,7 +121,7 @@ export default function CustomizePage() {
               <button
                 type="button"
                 onClick={() => setConfirmOpen(true)}
-                className="self-start rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
+                className="self-end rounded-xl px-3 py-2 text-sm font-medium text-gray-600 border border-gray-200"
               >
                 X
               </button>
@@ -144,7 +144,7 @@ export default function CustomizePage() {
                     onClick={() => setMusic(opt.id)}
                     className={`rounded-xl py-3 font-medium border transition ${
                       music === opt.id
-                        ? "bg-black text-white border-black"
+                        ? "bg-[#303030] text-white bg-[#303030]"
                         : "bg-white text-black border-gray-200"
                     }`}
                   >
@@ -164,7 +164,7 @@ export default function CustomizePage() {
                     type="button"
                     onClick={() => setGiftColor(c.value)}
                     className={`h-10 w-10 rounded-full border ${
-                      giftColor === c.value ? "border-black" : "border-gray-200"
+                      giftColor === c.value ? "border-[#303030]" : "border-gray-200"
                     }`}
                     style={{ backgroundColor: c.value }}
                     aria-label={c.name}
@@ -184,7 +184,7 @@ export default function CustomizePage() {
                     type="button"
                     onClick={() => setCardColor(c.value)}
                     className={`h-10 w-10 rounded-full border ${
-                      cardColor === c.value ? "border-black" : "border-gray-200"
+                      cardColor === c.value ? "border-[#303030]" : "border-gray-200"
                     }`}
                     style={{ backgroundColor: c.value }}
                     aria-label={c.name}
