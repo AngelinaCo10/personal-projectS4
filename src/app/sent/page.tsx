@@ -73,28 +73,35 @@ export default function SentPage() {
                   </div> */}
                   <div className="flex justify-center items-center">
                     <div className="relative w-50 h-50">
-                    <Image
-                      src="/Gifts.svg"
-                      alt="Gift"
-                      fill
-                      className="object-contain"
-                    />
+                      <Image
+                        src="/Gifts.svg"
+                        alt="Gift"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                   </div>
 
                   <div className="mt-4 grid grid-cols-3 gap-3">
                     <button
                       onClick={openWhatsApp}
-                      className="rounded-4xl py-3 bg-green-600 text-white"
                       type="button"
+                      className="rounded-4xl py-3 bg-green-600 text-white flex items-center justify-center"
                     >
-                      💬
+                      <div className="relative w-6 h-6">
+                        <Image
+                          src="/whatsapp-green.svg"
+                          alt="WhatsApp"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
                     </button>
-
                     <button
                       onClick={copyLink}
                       className="rounded-4xl py-3 border"
                       type="button"
+                      
                     >
                       {copied ? "Copied!" : "📋"}
                     </button>
@@ -111,12 +118,18 @@ export default function SentPage() {
               )}
             </div>
 
-            <Link href="/create" className="block text-center text-white/90 text-sm">
-              Maak nog een cadeau →
+            {/* <Link href="/" className="block text-center text-white/90 text-sm font-[Rowdies]">
+              Make another gift
+            </Link> */}
+            <Link
+              href="/"
+              className="hover:bg-[#303030] hover:text-white mt-6 block w-full text-center bg-white text-[#5ECCFF] py-4 rounded-4xl font-medium font-[rowdies]"
+            >
+              Make another gift
             </Link>
           </div>
         </div>
-        
+
       </main>
     </div>
   );
