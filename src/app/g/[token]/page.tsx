@@ -161,7 +161,9 @@ export default async function GiftPage(props: {
             <p className="mt-4 text-xs flex justify-center text-gray-500 font-['Anonymous_Pro']">
               Verstuurd op:{" "}
               {gift.sent_at
-                ? new Date(gift.sent_at).toLocaleString("nl-NL")
+                ? new Date(gift.sent_at).toLocaleString("nl-NL", {
+                  timeZone: "Europe/Amsterdam",
+                })
                 : "—"}
             </p>
 
