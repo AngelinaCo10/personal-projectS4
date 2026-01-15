@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#5ECCFF] md:bg-gray-200 md:flex md:justify-center md:py-10 ">
+    <div className="min-h-screen bg-[#5ECCFF] md:bg-gray-200 md:flex md:justify-center md:py-10 overflow-y-hidden">
       <main className="relative min-h-screen w-screen  bg-[#5ECCFF] p-6 md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
 
         {/* GIFTY gecentreerd */}
@@ -12,16 +12,16 @@ export default function Home() {
         </h1>
 
         {/* Center area */}
-        <div className="flex-1 flex items-center justify-center items-center">
+        <div className="flex-1 flex items-center justify-center">
           <div className=" w-80 h-80 bg-white rounded-[60px] p-6 text-center max-w-sm items-center">
-            <h2 className="text-4xl font-semibold mb-2 text-[#5ECCFF] mt-5 font-rowdies">
+            <h2 className="text-start text-4xl font-semibold mb-2 text-[#5ECCFF] mt-5 font-rowdies">
               Send your Gifty
             </h2>
-            <p className="text-gray-600">
+            <p className="text-start text-gray-600 font-[anonymous_pro]">
               Write a card message, choose an amount and send it to your friends and family digitally!
             </p>
             <div className="flex justify-end items-center">
-              <div className="relative w-50 h-50">
+              <div className="relative w-48 h-48">
                 <Image
                   src="/Gifts.svg"
                   alt="Gift"
@@ -37,7 +37,7 @@ export default function Home() {
         {/* Button onderaan */}
         <Link
           href="/create"
-          className="hover:bg-[#303030] hover:text-white mt-6 block w-full text-center bg-white text-[#5ECCFF] py-4 rounded-4xl font-medium"
+          className="hover:bg-[#303030] hover:text-white mt-6 block w-full text-center bg-white text-[#5ECCFF] py-4 rounded-4xl font-medium font-[rowdies]"
         >
           Make your gifty
         </Link>
