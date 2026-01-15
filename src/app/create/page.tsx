@@ -73,7 +73,7 @@ function onSubmit(e: React.FormEvent) {
     amount: String(amount),
   });
 
-  router.push(`/create/customize?${params.toString()}`);
+  router.push(`/customize?${params.toString()}`);
 }
 
   return (
