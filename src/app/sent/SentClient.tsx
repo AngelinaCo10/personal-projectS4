@@ -47,7 +47,7 @@ export default function SentClient() {
     return (
         <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
             <main className="min-h-screen w-screen bg-[#53ccff] p-6 md:max-w-[390px] md:rounded-2xl md:shadow-xl flex flex-col">
-                <h1 className="mt-[60px] text-[48px] text-white font-rowdies text-center font-['Rowdies']">
+                <h1 className="] text-[48px] text-white font-rowdies text-center font-['Rowdies']">
                     GIFTY
                 </h1>
 
