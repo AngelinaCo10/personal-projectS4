@@ -97,7 +97,7 @@ export default async function GiftPage(props: {
   // LET OP: jouw amountLabel was nu € (amount_cents) zonder /100.
   // Als je amount_cents echt cents zijn, gebruik: gift.amount_cents / 100
   const amountEuros = gift.amount_cents; // pas aan naar gift.amount_cents / 100 als je cents opslaat
-  const amountLabel = `€ ${amountEuros}`;
+  const amountLabel = `€${amountEuros}`;
 
   // ---------- Success UI ----------
   return (
@@ -123,32 +123,40 @@ export default async function GiftPage(props: {
               className="text-3xl font-semibold text-start ml-3 mt-3 mb-1 font-['Rowdies'] text-[#53ccff]"
             style={{ color: giftColor }}
             >
-              Surprise!
-              <br /> A Gifty for you
+              A GIFTY for you!
+              <br /> 
+              {/* Surprise!
+              <br /> A Gifty for you */}
             </h2>
+            <p className="font-[ROWDIES] ml-3 text-2xl text-[#303030]">Click on gift</p>
 
-            <p className="flex mt-5 ml-3 text-2xl text-gray-700 font-['Anonymous_Pro']">
-              <span className="text-2xl text-gray-900 mr-3">From:</span>{" "}
+            <p className="flex text-xl mt-5 ml-3 text-1xl text-gray-700 font-['Anonymous_Pro']">
+              <span className="text-xl text-gray-900 mr-3">From:</span>{" "}
               {gift.sender_name}
             </p>
 
             <p className="text-start ml-3 text-gray-600 font-['Anonymous_Pro']">
-              A message and a gift for you.
+              {/* A message and a gift for you.
               <br />
-              Click on the gift to open it.
+              Click on the gift to open it. */}
             </p>
 
             {/* Message box */}
             <div
-              className="p-4 flex flex-col h-70 mt-5 relative mb-6 shadow-[0px_4px_13px_0px_rgba(165,165,165,1.00)] "
+            
+              className="p-4 flex flex-col h-70 relative mt-2 mb-6 shadow-[0px_4px_13px_0px_rgba(165,165,165,1.00)] "
               style={{
                 backgroundColor: `${cardColor}`,
                 border: `1px solid ${cardColor}`,
               }}
+              
             >
+              
               <p className="mt-1 text-2xl text-gray-700 whitespace-pre-wrap font-['Anonymous_Pro']">
                 {gift.message}
+                
               </p>
+              
             </div>
 
             <div className="mt-10 flex justify-center items-center py-2 h-40">
@@ -159,7 +167,7 @@ export default async function GiftPage(props: {
             </div>
 
             <p className="mt-4 text-xs flex justify-center text-gray-500 font-['Anonymous_Pro']">
-              Verstuurd op:{" "}
+              Send at :{" "}
               {gift.sent_at
                 ? new Date(gift.sent_at).toLocaleString("nl-NL", {
                   timeZone: "Europe/Amsterdam",
