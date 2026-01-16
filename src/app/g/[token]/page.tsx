@@ -67,7 +67,7 @@ export default async function GiftPage(props: {
     return (
       <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
         <main className="min-h-screen w-screen bg-[#53ccff] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
-          <div className="mt-[60px] flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <h1 className="text-[48px] text-white font-rowdies text-center font-['Rowdies']">
               GIFTY
             </h1>

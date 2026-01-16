@@ -16,31 +16,32 @@ function ConfirmModal({
 }) {
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
-      <div className="w-full max-w-[390px] rounded-2xl bg-white p-5 shadow-xl">
-        <h3 className="text-lg font-semibold mb-2">Weet je het zeker?</h3>
-        <p className="text-gray-600 mb-5">{message}</p>
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
+            <div className="w-full max-w-[390px] rounded-2xl bg-white p-5 shadow-xl">
+                <h3 className="text-lg font-semibold mb-2 flex justify-center">Are you sure?</h3>
+                <p className="text-gray-600 mb-5">{message}</p>
 
-        <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-1/2 rounded-2xl py-3 font-medium border border-gray-200"
-          >
-            Nee, doorgaan
-          </button>
-          <button
-            type="button"
-            onClick={onConfirm}
-            className="w-1/2 rounded-2xl py-3 font-medium bg-black text-white"
-          >
-            Ja, stoppen
-          </button>
+                <div className="flex gap-3">
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="w-1/2 rounded-2xl py-3 font-medium border border-gray-200"
+                    >
+                        No, stay here
+                    </button>
+                    <button
+                        type="button"
+                        onClick={onConfirm}
+                        className="w-1/2 rounded-2xl py-3 font-medium bg-[#303030] text-white"
+                    >
+                        Yes, I am
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
+
 }
 
 const MUSIC_OPTIONS = [
@@ -108,7 +109,7 @@ export default function CustomizeClient() {
       <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
         <main className="min-h-screen w-screen bg-[#53ccff] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="mt-[60px] flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <h1 className="text-[48px] text-white font-rowdies text-center font-['Rowdies']">
               GIFTY
             </h1>
@@ -219,7 +220,7 @@ export default function CustomizeClient() {
               </div>
 
               {/* Buttons bottom (zelfde vibe als Create) */}
-              <div className="mt-auto pt-6 flex gap-3">
+              <div className="mt-auto flex gap-3">
                 <button
                   type="button"
                   onClick={goBack}

@@ -20,7 +20,7 @@ function ConfirmModal({
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
             <div className="w-full max-w-[390px] rounded-2xl bg-white p-5 shadow-xl">
-                <h3 className="text-lg font-semibold mb-2">Weet je het zeker?</h3>
+                <h3 className="text-lg font-semibold mb-2 flex justify-center">Are you sure?</h3>
                 <p className="text-gray-600 mb-5">{message}</p>
 
                 <div className="flex gap-3">
@@ -29,14 +29,14 @@ function ConfirmModal({
                         onClick={onClose}
                         className="w-1/2 rounded-2xl py-3 font-medium border border-gray-200"
                     >
-                        Nee, doorgaan
+                        No, stay here
                     </button>
                     <button
                         type="button"
                         onClick={onConfirm}
-                        className="w-1/2 rounded-2xl py-3 font-medium bg-black text-white"
+                        className="w-1/2 rounded-2xl py-3 font-medium bg-[#303030] text-white"
                     >
-                        Ja, stoppen
+                        Yes, I am
                     </button>
                 </div>
             </div>
@@ -100,7 +100,7 @@ export default function PreviewClient() {
             <div className="min-h-screen bg-[#53ccff] md:bg-gray-200 md:flex md:justify-center md:py-10">
                 <main className="min-h-screen w-screen bg-[#53ccff] md:w-full md:max-w-[390px] md:rounded-2xl md:shadow-xl md:overflow-hidden flex flex-col">
                     {/* Header */}
-                    <div className="mt-[60px] flex items-center justify-center">
+                    <div className="flex items-center justify-center">
                         <h1 className="text-[48px] text-white font-rowdies text-center font-['Rowdies']">
                             GIFTY
                         </h1>
@@ -162,7 +162,7 @@ export default function PreviewClient() {
 
             <ConfirmModal
                 open={confirmOpen}
-                message="Weet je zeker dat je wilt stoppen? Je wijzigingen gaan verloren."
+                message="If you go through, your present won’t be saved."
                 onClose={() => setConfirmOpen(false)}
                 onConfirm={() => router.push("/")}
             />

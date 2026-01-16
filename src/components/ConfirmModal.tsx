@@ -12,7 +12,7 @@ type ConfirmModalProps = {
 
 export default function ConfirmModal({
   open,
-  title = "Weet je het zeker?",
+  title = "Are you sure?",
   message,
   confirmText = "Stoppen",
   cancelText = "Doorgaan",
