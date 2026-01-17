@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## GIFTY
 
-## Getting Started
+## Personal Project Semester 4
 
-First, run the development server:
+## Description
+A money gifting app. Where you van send money as a gift digitally to your friends and family, while still giving the receiver a great experiencing getting money digital. A solution for living in a world where cash is being used less. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
+- Homepage
+- Create: From who is the gift, write a message and how much money do you want to give.
+- Gift customization: Upload a song, choose color of present and card.
+- Preview: Checking for the last time
+- Confirmation: Confirmation gift is send
+- Receivers page: With link you can see your present
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
+Clone or download this project using: https://github.com/AngelinaCo10/personal-projectS4.git
+Use a modern browser (Firefox, Avast Secure Browser).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Visit online app:
+https://personal-project-s4.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contact
+If you would like to get in touch, you can reach me at my school email address: a.coffie@student.fontys.nl
 
-## Learn More
+## Feedback
+I am open to feedback and suggestions. 
 
-To learn more about Next.js, take a look at the following resources:
+To open the browser, I use Live Server.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
