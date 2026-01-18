@@ -1,11 +1,11 @@
-## GIFTY
+# GIFTY
 
 ## Personal Project Semester 4
 
-## Description
+### Description
 A money gifting app. Where you van send money as a gift digitally to your friends and family, while still giving the receiver a great experiencing getting money digital. A solution for living in a world where cash is being used less. 
 
-## Overview
+### Overview
 - Homepage
 - Create: From who is the gift, write a message and how much money do you want to give.
 - Gift customization: Upload a song, choose color of present and card.
@@ -13,18 +13,19 @@ A money gifting app. Where you van send money as a gift digitally to your friend
 - Confirmation: Confirmation gift is send
 - Receivers page: With link you can see your present
 
-## Installation
+### Installation
 Clone or download this project using: https://github.com/AngelinaCo10/personal-projectS4.git
 Use a modern browser (Firefox, Avast Secure Browser).
 
-## Visit online app:
+### Visit app
 https://personal-project-s4.vercel.app/
 
-## Contact
-If you would like to get in touch, you can reach me at my school email address: a.coffie@student.fontys.nl
+### Contact
+If you would like to get in touch, you can reach me at: a.coffie@student.fontys.nl
 
-## Feedback
+### Feedback
 I am open to feedback and suggestions. 
 
 To open the browser, I use Live Server.
+
 
